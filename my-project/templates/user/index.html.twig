@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rechercher un Utilisateur | NeedHelp !{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron">
+
+        <div class="container mt-4">
+            {{ form_start(form) }}
+            <div class="form-row">
+                <div class="col">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-dark"> Rechercher </button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        {% for user in users %}
+            <div class="card text-center mt-4">
+                <h3 class="card-header"> {{ user.username  }}</h3>
+                <div class="card-body">
+                    <h4 class="card-title"></h4>
+                    <p class="card-text">Cliquez pour vous rendre sur son profil </p>
+                    <a href="{{ path('user.show', {'id': user.id, "slug": user.slug}) }}" class="btn btn-primary"> C'est parti !</a>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% if users | length <= 0 %}
+            <div class="jumbotron"> Aucun utilisateur trouvé</div>
+        {% endif %}
+        <div class="container mt-4">
+            <div class="pagination">
+                {{ knp_pagination_render(users) }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

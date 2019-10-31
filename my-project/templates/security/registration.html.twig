@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription | NeedHelp{% endblock %}
+
+{% block body %}
+
+
+
+    <h2 class="jumbotron text-center mt-4"> Inscription </h2>
+
+    <div class="container mt-4">
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.username,{'label':'Nom d\'utilisateur','attr':{'placeholder':'Nom d\'utilisateur ...'}}) }}
+    {{ form_row(form.email,{'label':'Adresse email','attr':{'placeholder':'Adresse email ...'}}) }}
+        {{ form_row(form.confirm_email,{'label':'Confirmation Adresse email','attr':{'placeholder':'Répètez votre adresse email ...'}}) }}
+    {{ form_row(form.password,{'label':'Mot de Passe','attr':{'placeholder':'Mot de Passe ...'}}) }}
+    {{ form_row(form.confirm_password,{'label':'Confirmation Mot de Passe','attr':{'placeholder':'Répétez votre mot de passe ...'}}) }}
+
+    <button type="submit" class="btn btn-outline-dark">Inscription</button>
+
+    {{ form_end(form) }}
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+SetEnv SHORT_OPEN_TAGS 0
+SetEnv REGISTER_GLOBALS 0
+SetEnv MAGIC_QUOTES 0
+SetEnv SESSION_AUTOSTART 0
+SetEnv ZEND_OPTIMIZER 1
+SetEnv PHP_VER 7_2
+
+RewriteEngine On RewriteBase / RewriteCond %{HTTP_HOST} ^www.arnaudduthoit.fr [NC] RewriteRule ^(.*)$ 
+http://arnaudduthoit.fr/$1 [L,R=301]
+
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Images
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresDefault "access 1 month"
+
+  # Video
+  ExpiresByType video/mp4 "access plus 1 year"
+  ExpiresByType video/mpeg "access plus 1 year"
+
+  # CSS, JavaScript
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+
+  # Others
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType application/x-shockwave-flash "access plus 1 month"
+</IfModule>

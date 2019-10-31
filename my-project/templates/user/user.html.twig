@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace personnel | NeedHelp{% endblock %}
+
+{% block body %}
+
+    <main class="container mt-4">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+
+        <div class="row">
+
+            <sidebar class="sidebar col-sm-6 col-md-4">
+                <nav>
+                    <ul class="nav flex-column">
+
+                        <li class="nav-item" style="border-right: solid 10px #bd285d">
+                            <a href="{{ path('user.projet.index') }}" class="list-group-item"> Gérer mes projets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('user.show', {'id': user.id, "slug": user.slug}) }}"
+                               class="list-group-item"> Mon profil public</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('user.new_pwd') }}" class="list-group-item"> Modifier mon mot de passe </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('user.editprofile') }}" class="list-group-item"> Modifier mes
+                                informations </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('user.deleteprofile') }}" class="list-group-item"> Supprimer mon
+                                compte </a>
+                        </li>
+                    </ul>
+                </nav>
+            </sidebar>
+
+            <section class="profile-content col-sm-6 col-md-8">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for projet in user.projets %}
+
+                            <tr>
+                                <td>
+                                    <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+                                </td>
+                                <td><a href="{{ path('user.projet.edit', {id: projet.id}) }}" class="btn btn-secondary">Editer</a>
+
+                                    <form method="post" action="{{ path('user.projet.delete' , {id : projet.id}) }}"
+                                          style="display: inline-block"
+                                          onsubmit="return confirm('Toute suppression est définitive ! Êtes-vous sûr de vouloir supprimer ce projet ? ')">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}">
+                                        <button class="btn btn-danger">Supprimer</button>
+                                    </form>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+{% endblock %}
+

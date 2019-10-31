@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages Contact Admin{% endblock %}
+
+{% block body %}
+
+
+    <h2 class="jumbotron text-center"> Messages reçus </h2>
+    <div class="container">
+        <div class="row">
+            {% for contact in contacts %}
+                <div class="col-sm-12 mt-12 text-center mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title list-group-item"> {{ contact.subject }} </h4>
+                            <p class="card-text text-center">
+                            <div class="list-group-item">{{ contact.createdAt | date('d/m/Y H:i') }}</div>
+                            <div class="list-group-item">{{ contact.name }}</div>
+                            <div class="list-group-item"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></div>
+                        </div>
+                    </div>
+                    <div class="card text-center" style="width: 100%">
+                        {{ contact.message }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

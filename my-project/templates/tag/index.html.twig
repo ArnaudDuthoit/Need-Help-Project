@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index Tags | NeedHelp{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+
+        <a href="{{ path('tag_new') }}" class="btn btn-outline-dark">Ajouter un nouveau tag</a>
+
+        <table class="table table-striped">
+
+                 <thead>
+                    <tr>
+                        <th>Nom</th>
+                         <th>actions</th>
+                    </tr>
+                 </thead>
+                <tbody>
+                    {% for tag in tags %}
+                      <tr>
+                        <td>{{ tag.name }}</td>
+                        <td><a href="{{ path('tag_edit', {'id': tag.id}) }}"
+                               class="btn btn-outline-dark">Modifier/Supprimer</a></td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">no records found</td>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+
+        <div class="pagination">
+            {{ knp_pagination_render(tags) }}
+        </div>
+    </div>
+
+{% endblock %}

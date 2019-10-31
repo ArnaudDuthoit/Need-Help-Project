@@ -1,0 +1,298 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} FAQ | NeedHelp {% endblock %}
+
+
+{% block body %}
+
+    <style>
+
+    </style>
+
+
+
+    <section class="accordion-section clearfix mt-3" aria-label="Question Accordions">
+        <div class="container">
+
+            <h2 class="h2_faq">Questions les plus frequemment posées </h2>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading p-3 mb-3" role="tab" id="heading0">
+                        <h3 class="panel-title">
+                            <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapse0" aria-expanded="true" aria-controls="collapse0">
+                                Questions générales sur le site
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="collapse0" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
+                        <div class="panel-body px-3 mb-4">
+                            <p>Comment fonctionne Needhelp ?</p>
+                            <ul>
+                                NeedHelp est une plateforme communautaire de deals permettant à tout le monde de partager
+                                les offres en ligne ou en magasin qui leur semblent être intéressantes.
+
+                                Un système de votes, représenté par les températures affichées sur chacun des deals,
+                                permet de trier les offres qui ont été partagées : les membres peuvent voter
+                                positivement quand ils estiment que l’offre est très intéressante ou négativement dans
+                                le cas contraire.
+
+                                Les deals qui dépassent 100° apparaissent alors sur la page d’accueil qui ne met donc en
+                                avant que les meilleures offres proposées par la communauté.
+
+                                NeedHelp est également un lieu d’entraide où les membres peuvent librement partager leurs
+                                expériences, conseils, astuces… le tout dans la bonne humeur et dans le respect des
+                                autres :).
+
+                            </ul>
+                            <p>Qui peut poster des deals ?</p>
+                            <ul>
+                                Tout le monde peut poster des bons plans, codes promo et autres deals sur NeedHelp. Pour
+                                cela, il suffit de s’inscrire (créer un compte prend moins d’une minute). Une seule
+                                restriction : personne n’a le droit de poster ses propres deals, par exemple une
+                                personne qui travaille chez un marchand X ou Y ne peut pas poster un bon plan chez ce
+                                marchand, une marque ne peut pas mettre en avant ses produits ou services ni charger
+                                directement quelqu’un de le faire à sa place. Cette restriction est nécessaire pour
+                                pouvoir assurer un contenu neutre et objectif à la communauté.
+                            </ul>
+
+                            <p>Les deals sont-ils modérés / édités ?</p>
+                            <ul>
+                                Les deals postés font l’objet d’une vérification avant validation et publication. Nous
+                                modifions parfois les titres de façon à ce que les deals soient clairement
+                                compréhensibles. Nous pouvons également ajouter des informations ou les modifier lorsque
+                                la description du deal n’est pas assez complète.
+
+                                Au bout d’un certain temps, les membres actifs peuvent poster des deals sans que cela ne
+                                nécessite une validation de notre part. Cependant, nous pouvons toujours effectuer les
+                                modifications évoquées ci-dessus à posteriori.
+
+                                Nous nous réservons le droit de ne pas publier certains deals s’ils ne respectent pas
+                                nos règles de publication, s’il s’agit d’offres permanentes ou de vendeurs douteux par
+                                exemple. Pour plus d’informations, vous pouvez lire nos règles !
+                            </ul>
+                            <p>Comment NeedHelp est-il financé ?</p>
+                            <ul>
+                                NeedHelp est principalement financé grâce à l’affiliation : nous avons mis en place des
+                                partenariats avec certains marchands et prestataires afin d’obtenir une commission
+                                lorsque vous passez commande par notre intermédiaire.
+
+                                Par ailleurs, nous proposons également à nos partenaires d’avoir la possibilité
+                                d’obtenir une meilleure visibilité sur leurs offres qui sont particulièrement
+                                intéressantes et plébiscitées par la communauté : si un deal atteint une température
+                                assez haute, il peut arriver qu'il soit épinglé en page d'accueil. Cela signifie qu'il
+                                va rester à la même place sur la page d'accueil pendant un certain temps, au lieu de
+                                descendre dans la liste au fur et à mesure que de nouveaux deals sont postés. Les bons
+                                plans ainsi mis en avant affichent la mention "Épinglé". Pour plus d'informations, voir
+                                la section "Que signifie la mention "Épinglé" présente sur certains deals ?".
+
+                                Nous estimons que notre mode de financement ne vient pas biaiser la neutralité de
+                                NeedHelp en tant que plateforme étant donné que ce sont toujours les votes émis par la
+                                communauté qui sont la base de nos mises en avant.
+                            </ul>
+
+                            <p>Comment travaille NeedHelp avec ses partenaires ?</p>
+                            <ul>
+                                Au-delà des simples liens affiliés, nous communiquons régulièrement avec nos
+                                partenaires. Cela peut prendre plusieurs formes, par exemple s'ils nous préviennent à
+                                l'avance lors d'opérations promotionnelles, ou si de nombreux membres nous signalent des
+                                soucis avec une commande liée à un deal. Cependant, le fait d’être partenaire ne
+                                signifie pas que l’on peut poster n’importe quelle offre sur le site.
+
+                                Comme précisé dans nos règles de publication, l'autopromotion (le fait de poster ou de
+                                faire poster ses propres offres) est interdite sur NeedHelp pour la simple et bonne
+                                raison que partager un deal dans son propre intérêt (et non dans l’intérêt de la
+                                communauté) vient totalement biaiser la neutralité du site. La modération veille de
+                                manière impartiale à ce que chacune des publications respecte cette règle.
+
+                                Nous comprenons qu’un marchand veuille promouvoir une offre en la postant sur NeedHelp,
+                                mais son intérêt propre passera, pour un marchand, toujours avant l’intérêt de la
+                                communauté. C’est tout à fait normal de vouloir promouvoir ses offres, mais NeedHelp
+                                n’est pas un panneau publicitaire, ce n’est donc ni notre rôle ni notre souhait que de
+                                laisser les marchands faire eux-mêmes leur publicité, surtout de manière trompeuse (car
+                                l’autopromotion passe par des profils d’utilisateurs qui pourraient passer pour des
+                                membres désintéressés).
+
+                                Un membre « normal » (c’est-à dire indépendant et non affilié à un marchand) va quant à
+                                lui partager un deal pour la communauté, ce qui change absolument tout. Notre vigilance
+                                au niveau de l’autopromotion fait partie intégrante de nos valeurs.
+
+                                Cependant, avec le temps, nous nous sommes rendu compte que certains deals, bien que
+                                qualifiés d’autopromotion car postés par les marchands, étaient malgré tout très bons et
+                                présentaient un intérêt pour la communauté. Nous avons donc mis en place une équipe
+                                éditoriale (ne pas confondre avec l’équipe de modération) qui joue le rôle de filtre
+                                entre les marchands et la communauté afin de garantir la neutralité du contenu.
+
+                                Les partenaires disposent ainsi d'une plateforme dédiée qui leur permet de proposer des
+                                deals, que notre équipe de rédacteurs décide de publier ou non en fonction de l'intérêt
+                                des offres pour la communauté. Nous avons grâce à cet espace d’échanges la possibilité
+                                d'expliquer à nos partenaires pourquoi nous refusons certaines de leurs propositions, et
+                                l'équipe de rédaction est seule juge de la pertinence des offres proposées.
+
+                                Bien entendu, nous ne communiquons aucune information personnelle sur nos membres et
+                                utilisateurs à nos partenaires !
+                            </ul>
+
+                            <p>En quoi les deals proposés par les partenaires se différencient-ils de l'auto-promotion
+                                ?</p>
+                            <ul>
+                                Les deals proposés directement par nos partenaires sont évalués et filtrés par notre
+                                équipe de rédaction – il s'agit globalement d'un système de newsletter très privé, où
+                                les marchands nous informent de leurs promotions en cours et à venir, parmi lesquelles
+                                la rédaction fouille pour ne garder que les vrais bons plans qui plairont à la
+                                communauté.
+
+                                Les règles du jeu sont très claires et c'est donc très différent de l'auto-promotion
+                                sauvage, où des marchands tentent de se faire passer pour des consommateurs pour faire
+                                passer une offre à tout prix. L'auto-promotion est une démarche malhonnête et
+                                dommageable à la communauté (nous devons parfois refuser des deals intéressants car le
+                                marchand ne joue pas le jeu de la confiance), alors que les offres proposées par les
+                                partenaires le sont dans une optique informative et transparente.
+                            </ul>
+                            <p>Peut-on savoir quels sont les marchands affiliés ?</p>
+                            <ul>
+                                Non, tout simplement parce que nous souhaitons conserver notre neutralité. L’équipe en
+                                charge des partenariats travaille indépendamment des modérateurs, ce qui permet d’avoir
+                                une modération neutre. Si la liste des partenaires était disponible, cela aurait une
+                                influence sur les deals postés par la communauté et les votes des membres, et donc cela
+                                mettrait en péril la pertinence et la neutralité des informations que vous trouvez sur
+                                NeedHelp. Par ailleurs, cette liste évolue régulièrement, il ne serait donc pas très
+                                productif de la publier.
+                            </ul>
+                            <p>Y a-t-il des équivalents à NeedHelp dans d’autres pays ?</p>
+                            <ul>
+                                Oui ! Nous sommes d’ailleurs associés à plusieurs de ces plateformes à travers un réseau
+                                international, Pepper. Vous pouvez retrouver les meilleurs deals d’une douzaine de pays
+                                : Allemagne, Royaume-Uni, Autriche, Pays-Bas, Brésil, États-Unis, Corée du Sud,
+                                Singapour, Mexique, Inde, Pologne… D’autres pays vont bientôt rejoindre le réseau, c’est
+                                autant de bons plans pour une communauté de plus en plus nombreuse !
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading p-3 mb-3" role="tab" id="heading1">
+                        <h3 class="panel-title">
+                            <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                Inscription et compte
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+                        <div class="panel-body px-3 mb-4">
+                            <p>Pourquoi s’inscrire ?</p>
+                            <ul>
+                                Vous pouvez consulter l’intégralité du contenu présent sur le site sans vous inscrire,
+                                mais vous devez posséder un compte pour pouvoir notamment poster un bon plan, voter,
+                                laisser des commentaires. Par ailleurs, nous développons régulièrement de nouvelles
+                                fonctionnalités pour les membres inscrits : création d’alertes, système de
+                                notifications, possibilité de suivre d’autres membres et de les contacter via messagerie
+                                privée… Tout est fait pour que les membres puissent personnaliser au maximum leur
+                                expérience sur le site.
+
+                                Deux possibilités s’offrent à vous :
+
+                                Vous pouvez décider de vous connecter avec votre compte Facebook ou Google (nous
+                                n’accédons pas à votre profil). Dans ce cas l’inscription est très rapide et aucune
+                                information ne vous est demandée.
+                                Vous pouvez vous inscrire via le traditionnel formulaire d’inscription du site qui ne
+                                comporte que trois champs à compléter : votre pseudo, votre adresse e-mail (valide, un
+                                courriel de confirmation vous sera envoyé), votre mot de passe.
+
+                            </ul>
+                            <p>L’inscription a-t-elle un coût ?</p>
+                            <ul>
+                                Non. La création d’un compte NeedHelp et l’utilisation de l’ensemble des fonctionnalités
+                                est entièrement gratuite. Les applications (Android et iOS) sont également gratuites, et
+                                sans achats intégrés. Le site comme les applications sont 100% sans publicité
+                                extérieure.
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading p-3 mb-3" role="tab" id="heading2">
+                        <h3 class="panel-title">
+                            <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                                Utiliser NeedHelp
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+                        <div class="panel-body px-3 mb-4">
+                            <p>À quoi correspond l'onglet "À la Une" de la page d’accueil ?</p>
+                            <ul>
+                                La page “À la une” est le point d’entrée des nouveaux utilisateurs car il s’agit de la
+                                page d’accueil par défaut. Elle a pour principal objectif de proposer un contenu de
+                                qualité et diversifié pour correspondre au plus grand nombre de personnes.
+
+                                Nous conseillons aux utilisateurs habitués du site de consulter l’onglet Hot pour un
+                                aperçu plus vaste des bons plans du moment, ainsi que l’onglet Nouveaux pour contribuer
+                                au tri des deals via les votes.
+
+                                Le contenu de la page “À la Une” est sélectionné manuellement par notre équipe – elle
+                                est la seule dans ce cas. Pour cette raison, il est possible que certains des deals mis
+                                en avant soient orientés par un partenariat, même si la base d’une sélection est et sera
+                                toujours la température (il faut donc que la communauté ait validé le deal pour qu’il
+                                soit choisi par l’équipe). Nous ne choisissons pour la page “À la Une” que des deals
+                                dépassant un certain seuil de température, en faisant au mieux pour apporter de la
+                                diversité dans cette page.
+
+                                Vous avez bien évidemment le choix d’afficher ou non cette sélection, ou d’opter pour
+                                l’onglet de votre choix comme accueil par défaut. Vous pouvez choisir vos préférences
+                                dans les paramètres de votre compte, dans l’onglet Préférences > Page d’accueil par
+                                défaut. Attention : cette option n’est accessible qu’en étant connecté(e) au site !
+
+
+                            </ul>
+                            <p>Où trouver tous les deals d’un seul marchand ?</p>
+                            <ul>
+                                Pour la plupart des marchands, une page a été créée qui rassemble tous les bons plans
+                                qui le concernent : deals, codes promo et produits gratuits sont ainsi accessibles
+                                marchand par marchand. Vous trouverez la liste complète des marchands sur cette page.
+                                Vous pouvez également accéder à un marchand spécifique de plusieurs façons :
+
+                                Via le menu, en sélectionnant un marchand affiché parmi les plus populaires, ou en
+                                cliquant sur "Voir tout" pour afficher la liste complète
+                                Via les widgets "Top marchands" et "Marchands similaires" présents sur les pages de
+                                deals et les pages des marchands
+                                Via la barre de recherche en tapant au moins 3 lettres du nom du marchand.
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading p-3 mb-3" role="tab" id="heading3">
+                        <h3 class="panel-title">
+                            <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                                Nous contacter
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
+                        <div class="panel-body px-3 mb-4">
+                            <p>Comment puis-je contacter NeedHelp ?</p>
+                            <ul>
+                                Vous pouvez adresser toutes vos questions et demandes de partenariats directement via le
+                                formulaire de contact du site.
+
+                                Si vous voulez nous faire un retour sur un dysfonctionnement ou un bug sur le site,
+                                n’hésitez pas à créer un feedback pour que les autres membres puissent également
+                                commenter !
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

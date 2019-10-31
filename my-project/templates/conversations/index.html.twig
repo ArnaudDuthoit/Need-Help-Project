@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <main class="container mt-4">
+
+        <div class="row">
+
+            <sidebar class="sidebar col-sm-6 col-md-4">
+                <nav>
+                    <ul class="nav flex-column">
+                        {% for user in users %}
+                        <li class="nav-item">
+                            <a href="{{ path('conversations.show', {'id': user.id}) }}"
+                               class="list-group-item"> {{ user.username }}
+                                {% if unread[user.id]  is defined %}
+                                    <span class="badge badge-pill badge-primary"> {{ unread[user.id] }}
+                                        message(s) non lus </span>
+                                {% endif %}</a>
+                            {% endfor %}
+                        </li>
+                    </ul>
+                </nav>
+            </sidebar>
+
+            <section class="profile-content col-sm-6 col-md-8">
+                <div class="card">
+
+                    <div class="card-header">
+                        Retrouvez ici toutes vos discussions privées !
+                    </div>
+
+                    <div class="card-body"><p> Cliquez sur l'utilisateur pour démarrer ou poursuivre une conversation </p>
+
+                        <a href="{{ path('conversations.show', { 'id' : user.id }) }}"> Vous pouvez vous servir de cet espace comme mémo </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+
+{% endblock %}

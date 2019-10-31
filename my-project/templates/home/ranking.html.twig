@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ranking | NeedHelp {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <H2 class="mt-4 text-center" style="color:grey">LES PLUS POPULAIRES !</H2>
+        <div class="row">
+            {% set Rank = 0 %}
+            {% for projet in projetliked %}
+                {% set Rank = Rank + 1 %}
+                <div class="col-sm-3 mt-4">
+                    <div class="card">
+                        <H1><span
+                                    {% if Rank == 1 %} class="badge badge-warning" {% elseif Rank == 2 %}
+                                                       class="badge badge-primary"
+                                    {% elseif  Rank == 3 %} class="badge badge-success" {% else %}
+                                                       class="badge badge-dark"
+                                                       {% endif %}style="position: absolute;top: 10%;left: 10%;transform:translate(-50%, -50%);">{{ Rank }}
+                                </span>
+                        </H1>
+                        <!-- set a width on the image otherwise it will expand to full width       -->
+                        <img class="card-img-top img-fluid" {% if projet.projet.filename %}
+                            src="{{ vich_uploader_asset(projet.projet, 'imageFile') | imagine_filter('thumb') }}" {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}" {% endif %}
+                             alt="Card image cap" width="400">
+
+                        <div class="card-body">
+                            <h4 class="card-title text-center">
+                               <a href="{{ path('projet.show', {'id': projet.projet.id, "slug": projet.projet.slug}) }}">{{ projet.projet.title }}</a>
+
+                            </h4>
+
+                            <p class="card-text text-center">
+                                {% for tag in projet.projet.tags %}
+                                <a href="{{ path('projet.index') }}?tags[]={{ tag.id }}">
+                                    #{{ tag.name }}  </a>
+                                {% endfor %}
+
+                            </p>
+                        </div>
+                        <div class="card-footer text-center">
+                            {% if app.user %}
+                                <a href="{{ path('projet.like', {slug: projet.projet.slug, id: projet.projet.id}) }}"
+                                   class="btn btn-link js-like">
+                                    {% if app.user and projet.projet.isLikedByUser(app.user) %}
+                                        <i class="fas fa-bookmark"></i>
+                                    {% else %}
+                                        <i class="far fa-bookmark"></i>
+                                    {% endif %}
+                                    <span class="label"> Suivis par </span>
+                                    <span class="js-likes"> {{ projet.projet.likes | length }}</span>
+                                    <span class="label"> personne(s)  </span>
+                                </a>
+                            {% else %}
+                                <span class="label"> Suivis par </span>
+                                <span class="js-likes"> {{ projet.projet.likes | length }}</span>
+                                <span class="label"> personne(s)  </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

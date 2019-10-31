@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des conversations ! {% endblock %}
+
+{% block body %}
+
+    <main class="container mt-4">
+
+        <section class="row">
+
+            <sidebar class="sidebar col-sm-6 col-md-4">
+                <nav>
+                    <ul class="nav flex-column">
+                        {% for user in users %}
+                        <li class="nav-item">
+                            <a href="{{ path('conversations.show', {'id': user.id}) }}"
+                               class="list-group-item"> {{ user.username }}
+                                {% if unread[user.id]  is defined %}
+                                    <span class="badge badge-pill badge-primary"> {{ unread[user.id] }}
+                                        message(s) non lus </span>
+                                {% endif %}
+                            </a>
+                            {% endfor %}
+                        </li>
+                    </ul>
+                </nav>
+            </sidebar>
+
+            <section class="profile-content col-sm-6 col-md-8">
+                <div class="card">
+                    <div class="card-header">Conversation avec {{ user.username }}
+                        <span class="pagination"> {{ knp_pagination_render(messages) }} </span>
+                    </div>
+                    <div class="card-body conversations">
+                        {% for message in messages|reverse %}
+                            <div class="row">
+                                <div class="col-md-12 {% if message.fromId != user %} flex-row-reverse text-right {% endif %}">
+                                    <p>
+                                        <strong> {% if message.fromId != user %} Moi {% else %} {{ message.fromId.username }} {% endif %}</strong>
+                                        <small> ({{ message.createdAt | date('d/m/Y H:i') }}) :</small>
+                                        <br>
+                                        {{ message.content | nl2br }}
+                                    </p>
+                                    <hr>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+
+{% endblock %}

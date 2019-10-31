@@ -1,0 +1,77 @@
+<header class="site-header">
+
+        <nav class="navbar navbar-expand-lg first_nav">
+
+            <div class="nav-item" >
+                <a href="{{ path('home') }}" class="nav-link nav_link_needhelp">NeedHelp </a></div>
+
+            {% if not app.user %}
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item btn background_nav_item_connect">
+                    <a href="{{ path('security_login') }}" class="nav-link connect_nav"> Se connecter </a>
+                </li>
+                <li class="nav-item btn background_nav_item_register">
+                    <a href="{{ path('security_registration') }}" class="nav-link register_nav_link">
+                        S'inscrire </a>
+                </li>
+            </ul>
+            {% endif %}
+        </nav>
+</header>
+
+<div class="site-header" id="myHeader" style="z-index: 1000">
+    <nav class="navbar navbar-expand-lg background_navbar">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                style="background-color: white">
+            <span class="navbar-toggler-icon text-right"> <img
+                        src="https://img.icons8.com/metro/26/000000/menu.png" alt="hamburger_menu_icon"> </span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ path('user.projet.create') }}" style="color:white;{% if current_menu is defined and current_menu == 'new' %}border-bottom-style: solid;border-bottom-color:white{% endif %}"> Publier un projet </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link"
+                           href="{{ path('projet.index') }}" style="color:white;{% if current_menu is defined and current_menu == 'search' %}border-bottom-style: solid;border-bottom-color:white{% endif %}"> Chercher un projet </a>
+                    </li>
+
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ path('user.projet.index') }}" style="color:white;
+                                {% if current_menu is defined and current_menu == 'settings' %}border-bottom-style: solid;border-bottom-color:white{% endif %}"> <i class="fas fa-user-cog"> Mon compte</i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ path('conversations') }}"
+                           style="color:white;{% if current_menu is defined and current_menu == 'conversations' %}border-bottom-style: solid;border-bottom-color:white{% endif %}"> {{ NewMessages_g.CountMessages() | length }} <i class="far fa-envelope"></i> </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+                           href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;{% if current_menu is defined and current_menu == 'admin' %}border-bottom-style: solid;border-bottom-color:white{% endif %}">
+                            Connecté en tant que {{ currentUser_g.getCurrentUser() }}</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ path('security_logout') }}">Se déconnecter</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('admin.projet.index') }}">Espace
+                                    d'Administration</a>
+                                <a class="dropdown-item" href="{{ path('messages_contact') }}"> Messages reçus via Formulaire de contact</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</div>
+

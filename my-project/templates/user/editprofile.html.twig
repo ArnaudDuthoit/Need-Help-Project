@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+    <main class="container mt-4">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="row">
+
+            <sidebar class="sidebar col-sm-6 col-md-4">
+                <nav>
+                    <ul class="nav flex-column">
+
+                        <li class="nav-item">
+                            <a href="{{ path('user.projet.index') }}" class="list-group-item"> Gérer mes projets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('user.show', {'id': user.id, "slug": user.slug}) }}"
+                               class="list-group-item"> Mon profil public</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('user.new_pwd') }}" class="list-group-item"> Modifier mon mot de passe </a>
+                        </li>
+                        <li class="nav-item" style="border-right: solid 10px #bd285d">
+                            <a href="{{ path('user.editprofile') }}" class="list-group-item"> Modifier mes
+                                informations></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('user.deleteprofile') }}" class="list-group-item"> Supprimer mon
+                                compte </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </sidebar>
+
+            <section class="profile-content col-sm-6 col-md-8">
+                <div class="container border_container">
+
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button class="btn btn-primary">Modifier</button>
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}

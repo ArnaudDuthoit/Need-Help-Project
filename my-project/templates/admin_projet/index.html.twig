@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Gérer les projets  | NeedHelp {% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="text-left">
+            <a href="{{ path('tag_index') }}" class="btn btn-warning">Gérer les tags</a>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="pagination">
+            {{ knp_pagination_render(projets) }}
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th> Auteur</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+                {% for projet in projets %}
+                    <tr>
+
+                        <td>
+                            <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('user.show', {'id': projet.user.id, "slug": projet.user.slug}) }}">{{ projet.user.username }}</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('admin.projet.edit', {id: projet.id}) }}" class="btn btn-secondary">Editer</a>
+
+                            <form method="post" action="{{ path('admin.projet.delete' , {id : projet.id}) }}"
+                                  style="display: inline-block"
+                                  onsubmit="return confirm('Toute suppression est définitive ! Êtes-vous sûr de vouloir supprimer ce projet ? ')">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

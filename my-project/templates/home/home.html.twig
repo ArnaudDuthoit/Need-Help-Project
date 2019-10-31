@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Bienvenue sur la page d'Accueil du site d'entraide NeedHelp ! {% endblock %}
+
+
+{% block body %}
+
+    <div class="jumbotron text-center mt-4" id="home">
+        <h1 id="mainhome">Recherche un
+            projet qui te convient !
+        </h1>
+        <p><a href="{{ path('projet.index') }}"> <img id="go" src="{{ asset('/pictures/go.png') }}" alt="Image_start">
+            </a>
+        </p>
+    </div>
+
+    <div class="container" id="homecontainer">
+
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-warning">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="container">
+            <H2 class="mt-4 h2home"> <strong> Les plus récents </strong></H2>
+            <div class="row">
+                {% for projet in last %}
+                    <div class="col-sm-3 mt-4">
+                        <div class="card">
+                            <img class="card-img-top img-fluid"
+                                    {% if projet.filename %}
+                                         src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                                    {% else %}
+                                        src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                                    {% endif %}
+                                        alt="Card image {{ projet.filename }}" width="400">
+                            <div class="card-body">
+                                <div class="card-title"></div>
+                                <p class="card-text text-center">
+                                    {% for tag in projet.tags %}
+                                 <a href="{{ path('projet.index', {'tags[]' : tag.id}) }}">
+                                     #{{ tag.name }}</a>
+                                {% endfor %}
+                                </p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{{ path('lastest') }}" class="btn btnhome">
+                    Voir tous les plus recents </a>
+            </div>
+
+            <div id="homepopular">
+                <H3 class="mt-4 h2home"><strong>Les plus populaires</strong></H3>
+                <div class="row">
+                    {% for projet in projetliked %}
+                        <div class="col-sm-3 mt-4">
+                            <div class="card">
+                                <!-- set a width on the image otherwise it will expand to full width       -->
+                                <img class="card-img-top img-fluid" {% if projet.projet.filename %}
+                                    src="{{ vich_uploader_asset(projet.projet, 'imageFile') | imagine_filter('thumb') }}" {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}" {% endif %}
+                                     alt="Card image cap {{ projet.projet.filename }}" width="400">
+                                <div class="card-body">
+                                    <div class="card-title text-center">
+                                        <a href="{{ path('projet.show', {'id': projet.projet.id, "slug": projet.projet.slug}) }}">{{ projet.projet.title }}</a>
+                                    </div>
+                                    <div class="card-text text-center">
+                                        {% for tag in projet.projet.tags %}
+                                            <a href="{{ path('projet.index', {'tags[]' : tag.id}) }}">
+                                                 #{{ tag.name }}  </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    {% if app.user %}
+                                        <a href="{{ path('projet.like', {slug: projet.projet.slug, id: projet.projet.id}) }}"
+                                           class="btn btn-link js-like">
+                                            {% if app.user and projet.projet.isLikedByUser(app.user) %}
+                                                <i class="fas fa-bookmark"></i>
+                                            {% else %}
+                                                <i class="far fa-bookmark"></i>
+                                            {% endif %}
+                                            <span class="js-label"> Suivis par  </span>
+                                            <span class="js-likes"> {{ projet.projet.likes | length }}</span>
+
+                                            {% if projet.projet.likes |length > 1 %}
+
+                                                <span class="js-label"> personnes  </span>
+
+                                            {% else %}
+
+                                                <span class="js-label"> personne  </span>
+
+                                            {% endif %}
+                                        </a>
+
+                                    {% else %}
+
+                                        <span> Suivis par {{ projet.projet.likes | length }}
+
+                                            {% if projet.projet.likes | length > 1 %}
+                                                personnes {% else %} personne  {% endif %}</span>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{{ path('ranking') }}" class="btn btnhome">Voir tous les plus populaires </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

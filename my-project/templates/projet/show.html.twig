@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+{% block title %} {{ projet.title }} | NeedHelp{% endblock %}
+
+
+{% block body %}
+
+    <style>
+
+        .row > div[class*='col-'] {
+            display: block;
+        }
+
+    </style>
+
+    <div class="container mt-4">
+
+        <div class="row">
+            <div class="col-md-6">
+                {% if projet.filename %}
+                    <img src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('medium') }}" alt=""
+                         class="card-img-top">
+                {% else %}
+                    <img src="{{ 'images/projets/empty.jpg' | imagine_filter('medium') }}" alt="" class="card-img-top"
+                         style="width: 100%; height: auto;">
+                {% endif %}
+            </div>
+            <div class="col-md-6 text-center">
+                <h1>{{ projet.title }}</h1>
+                <h2>Posté par : <a
+                            href="{{ path('user.show', {'id': projet.user.id, "slug": projet.user.slug}) }}">{{ projet.user.username }}</a>
+                </h2>
+                <h2>Publié le : {{ projet.createdAt | date('d/m/Y') }}</h2>
+                <a href="{{ path('projet.like', {slug: projet.slug, id: projet.id}) }}" class="btn btn-link js-like">
+                    {% if app.user and projet.isLikedByUser(app.user) %}
+                        <i class="fas fa-bookmark"></i>
+                    {% else %}
+                        <i class="far fa-bookmark"></i>
+                    {% endif %}
+                    <span class="js-label"> Suivis par  </span>
+                    <span class="js-likes"> {{ projet.likes | length }}</span>
+
+                    {% if projet.likes |length > 1 %}
+
+                        <span class="js-label"> personnes  </span>
+
+                    {% else %}
+
+                        <span class="js-label"> personne  </span>
+
+                    {% endif %}
+                </a>
+                <a href="#" class="btn btn-primary" id="contactButton"
+                   {% if form.vars.submitted %}style="display: none" {% endif %}> Envoyer un message privé au
+                    posteur </a>
+
+                <div id="contactForm" class="mt-4" {% if not form.vars.submitted %}style="display: none" {% endif %}>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            {{ projet.description | nl2br }}
+        </div>
+
+        <div class="container mt-4">
+
+            <h3> Tags </h3>
+
+            <ul class="list-group list-group-horizontal">
+                {% for tag in projet.tags %}
+                    <li class="list-group-item">  <a href="{{ path('projet.index') }}?tags[]={{ tag.id }}">
+                            <div> {{ tag.name }} </div> </a> </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

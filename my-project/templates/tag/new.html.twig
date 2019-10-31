@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Tag | NeedHelp{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+         <h1 class="text-center">Créer un nouveau tag  <a href="{{ path('tag_index') }}" class="btn btn-outline-dark">Retour à la liste</a></h1>
+        {{ include('tag/_form.html.twig') }}
+    </div>
+
+
+{% endblock %}
+
+

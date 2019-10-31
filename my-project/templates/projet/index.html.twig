@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets | NeedHelp{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="container mt-4" id="search_container">
+                    <div class="container">
+                        {{ form_start(form) }}
+                        <div class="form-group">
+                            {{ form_row(form.projectname) }}
+                        </div>
+                        <div class="form-group">
+                            Frameworks et librairies {{ form_row(form.tags) }}
+                        </div>
+                    </div>
+                    <div class="container text-center">
+                        <button class="btn btn-outline-dark"><img src="https://img.icons8.com/color/48/000000/go.png">
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        {{ form_end(form) }}
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ path('user.index') }}" class="btn" id="search_user_button">
+                            Rechercher un utilisateur </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-8">
+                {%  if projets | length == 0 %}
+                <div class="container mt-4 color_black">Aucun resultat trouvé ...</div>
+                {% endif %}
+                <div class="row">
+                    {% for projet in projets %}
+                        <div class="col-sm-6 mt-4">
+                            <div class="card">
+                                <img class="card-img-top img-fluid" {% if projet.filename %}
+                                    src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                                {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                                {% endif %}
+                                     alt="Card image cap" width="400">
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">
+                                        <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+                                    </h4>
+                                    <p class="card-text text-center color_black"> {% for tag in projet.tags %}
+                                            <a href="{{ path('projet.index', {'tags[]' : tag.id}) }}">
+                                                #{{ tag.name }}  </a>
+                                    {% endfor %}</p>
+                                </div>
+                                <div class="card-footer color_black">
+                                    Posté par :<a href="{{ path('user.show', {'id': projet.user.id, "slug": projet.user.slug}) }}"> {{ projet.user.username }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="container">
+                <div class="pagination mt-4" id="paginate_float">
+                    {{ knp_pagination_render(projets) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
