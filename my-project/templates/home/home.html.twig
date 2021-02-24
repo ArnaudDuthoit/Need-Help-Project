@@ -28,18 +28,15 @@
         {% endfor %}
 
         <div class="container">
-            <H2 class="mt-4 h2home"> <strong> Les plus récents </strong></H2>
+            <H2 class="mt-4 h2home"> <strong>Les plus récents </strong></H2>
             <div class="row">
                 {% for projet in last %}
                     <div class="col-sm-3 mt-4">
                         <div class="card">
-                            <img class="card-img-top img-fluid"
-                                    {% if projet.filename %}
-                                         src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
-                                    {% else %}
-                                        src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                                    {% endif %}
-                                        alt="Card image {{ projet.filename }}" width="400">
+                            <img class="card-img-top img-fluid" {% if projet.filename %}
+                                src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}" {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}" {% endif %}
+                                 alt="Card image {{ projet.filename }}" width="400">
+
                             <div class="card-body">
                                 <div class="card-title"></div>
                                 <p class="card-text text-center">
@@ -51,10 +48,12 @@
                             </div>
                             <div class="card-footer text-center">
                                 <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+
                             </div>
                         </div>
                     </div>
                 {% endfor %}
+
             </div>
 
             <div class="text-center mt-4">
@@ -63,7 +62,8 @@
             </div>
 
             <div id="homepopular">
-                <H3 class="mt-4 h2home"><strong>Les plus populaires</strong></H3>
+                <H3 class="mt-4 h2home"><strong>Les plus populaires</strong>
+                </H3>
                 <div class="row">
                     {% for projet in projetliked %}
                         <div class="col-sm-3 mt-4">
@@ -72,6 +72,7 @@
                                 <img class="card-img-top img-fluid" {% if projet.projet.filename %}
                                     src="{{ vich_uploader_asset(projet.projet, 'imageFile') | imagine_filter('thumb') }}" {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}" {% endif %}
                                      alt="Card image cap {{ projet.projet.filename }}" width="400">
+
                                 <div class="card-body">
                                     <div class="card-title text-center">
                                         <a href="{{ path('projet.show', {'id': projet.projet.id, "slug": projet.projet.slug}) }}">{{ projet.projet.title }}</a>

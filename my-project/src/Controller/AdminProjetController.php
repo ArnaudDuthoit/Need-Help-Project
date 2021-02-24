@@ -6,7 +6,7 @@ use App\Entity\Projet;
 
 use App\Form\ProjetType;
 use App\Repository\ProjetRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,10 +56,10 @@ class AdminProjetController extends AbstractController
      * @Route("/admin/projet/{id}", name="admin.projet.edit", methods="GET|POST")
      * @param Projet $projet
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function edit(Projet $projet, Request $request, ObjectManager $manager)
+    public function edit(Projet $projet, Request $request, EntityManagerInterface $manager)
     {
 
         $form = $this->createForm(ProjetType::class, $projet);
@@ -83,10 +83,10 @@ class AdminProjetController extends AbstractController
      * @Route("admin/projet/{id}", name="admin.projet.delete" , methods="DELETE")
      * @param Projet $projet
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete(Projet $projet, Request $request, ObjectManager $manager)
+    public function delete(Projet $projet, Request $request, EntityManagerInterface $manager)
     {
 
         if ($this->isCsrfTokenValid('authenticate', $request->get('_token'))) { // check if csrf token is valid

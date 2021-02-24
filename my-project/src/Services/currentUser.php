@@ -10,7 +10,7 @@ namespace App\Services;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 
 class currentUser extends UserRepository
@@ -20,10 +20,10 @@ class currentUser extends UserRepository
 
     /**
      * NewMessages constructor.
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      * @param \Symfony\Component\Security\Core\Security $security
      */
-    public function __construct(RegistryInterface $registry,\Symfony\Component\Security\Core\Security $security) // Definit ici la valeur de la globale
+    public function __construct(ManagerRegistry $registry,\Symfony\Component\Security\Core\Security $security) // Definit ici la valeur de la globale
     {
         parent::__construct($registry, User::class);
         $this->securityObj = $security;

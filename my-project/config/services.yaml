@@ -4,42 +4,34 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'fr'
+    locale: 'fr_FR'
 
 services:
-    app.security.voter.edit_projet_voter:
-        class: App\Security\Voter\EditProjetVoter
-        tags:
-            - { name: security.voter }
-    app.security.voter.delete_projet_voter:
-        class: App\Security\Voter\DeleteProjetVoter
-        tags:
-            - { name: security.voter }
-
-
-
+    custom_doctrine_orm_naming_strategy_underscore:
+        class: Doctrine\ORM\Mapping\UnderscoreNamingStrategy
+        arguments:
+            - 0
+            - true
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-
-
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
-        resource: '../src/Controller'
+        resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-
-    App\Listener\ImageCacheSubscriber:
-        tags:
-        - { name: doctrine.event_subscriber }

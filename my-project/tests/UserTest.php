@@ -9,6 +9,7 @@
 namespace App\Tests;
 
 use App\Entity\User;
+use Doctrine\Migrations\Configuration\YamlConfiguration;
 use PHPUnit\Framework\TestCase;
 
 

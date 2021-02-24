@@ -9,7 +9,7 @@ use App\Entity\Messages;
 use App\Form\ProjetSearchType;
 use App\Repository\PostLikeRepository;
 use App\Repository\ProjetRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -123,11 +123,11 @@ class ProjetController extends AbstractController
      * For like or unlike a project
      * @Route("user/projets/{slug}-{id}/like", name="projet.like", requirements={"slug": "[a-z0-9\-]*"})
      * @param Projet $projet
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @param PostLikeRepository $likeRepository
      * @return Response
      */
-    public function like(Projet $projet, ObjectManager $manager, PostLikeRepository $likeRepository): Response
+    public function like(Projet $projet, EntityManagerInterface $manager, PostLikeRepository $likeRepository): Response
 
     {
         $user = $this->getUser(); #Get the logged in user
@@ -156,7 +156,7 @@ class ProjetController extends AbstractController
         #if the user didn't like the project => add a like to this project
         $like = new PostLike();
         $like->setProjet($projet)
-               ->setUser($user);
+            ->setUser($user);
 
         $manager->persist($like);
         $manager->flush();

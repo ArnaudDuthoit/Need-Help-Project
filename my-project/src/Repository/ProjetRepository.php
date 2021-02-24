@@ -7,7 +7,7 @@ use App\Entity\ProjetSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 
 /**
@@ -18,7 +18,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ProjetRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Projet::class);
     }
@@ -32,20 +32,28 @@ class ProjetRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('p');
 
         if ($search->getProjectname()) { #Put the input search in the query.
-            $query = $query
+
+            $query =
+                $query
                     ->where('p.title LIKE :search')
+
                     #Add some joker at the beginning and a the end for more results
                     ->setParameter('search', '%' . $search->getProjectname() . '%');
+
         }
+
         if ($search->getTags()->count() > 0) { #if the user select at least one tag
 
             foreach ($search->getTags() as $tag) {
+
                 $query = $query
                     ->andWhere(":tag MEMBER OF p.tags")
                     ->setParameter("tag", $tag);
             }
         }
+
         return $query->getQuery();
+
     }
 
     /**

@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <h4 class="card-title text-center"><a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a> </h4>
                             <p class="card-text text-center"> {% for tag in projet.tags %}
-                                    <a href="{{ path('projet.index') }}?tags[]={{ tag.id }}">
+                                    <a href="{{ path('projet.index', {'tags[]' : tag.id}) }}">
                                         #{{ tag.name }}  </a>
                                 {% endfor %}</p>
                         </div>

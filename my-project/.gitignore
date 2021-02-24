@@ -1,51 +1,12 @@
-public/images
-public/media
-public/pictures
-config
-webpack.config.js
-package-lock.json
-package.json
-symfony.lock
-phpunit.xml.dist
-yarn.lock
-
-.env
-.env.test
-composer.json
-composer.lock
-.phpunit.result.cache
 
 ###> symfony/framework-bundle ###
+/.env
+.env
 /.env.local
 /.env.local.php
 /.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-###> symfony/phpunit-bridge ###
-.phpunit
-/phpunit.xml
-###< symfony/phpunit-bridge ###
-
-###> symfony/web-server-bundle ###
-/.web-server-pid
-###< symfony/web-server-bundle ###
-
-###> liip/imagine-bundle ###
-
-###< liip/imagine-bundle ###
-
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-npm-debug.log
-
-###< symfony/webpack-encore-bundle ###
-
-###> phpunit/phpunit ###
-
-###< phpunit/phpunit ###
-/public/pictures/
-/bin/
-/assets/

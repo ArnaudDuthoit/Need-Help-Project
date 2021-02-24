@@ -6,7 +6,7 @@ use App\Entity\User;
 use Doctrine\ORM\Query;
 use App\Entity\UserSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,7 +16,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class UserRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
@@ -35,11 +35,11 @@ class UserRepository extends ServiceEntityRepository
 
             $query = $this->createQueryBuilder('p');
             $query = $query->where('p.username LIKE :search')
-
-                #Put some joker for more results
-                ->setParameter('search', '%' . $search->getname() . '%');
+                ->setParameter('search', '%' . $search->getname() . '%'); #Put some joker for more results
         }
+
         return $query->getQuery();
+
     }
 
     /**

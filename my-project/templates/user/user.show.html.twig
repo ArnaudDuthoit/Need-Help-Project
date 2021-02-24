@@ -52,7 +52,7 @@
                             <div class="card-body">
                                 <h4 class="card-title"></h4>
                                 <p class="card-text text-center">{% for tag in projet.tags %}
-                                        <a href="{{ path('projet.index', {'tags[]' : tag.id}) }}">
+                                        <a href="{{ path('projet.index') }}?tags[]={{ tag.id }}">
                                             #{{ tag.name }}  </a>
                                     {% endfor %}
                                 </p>
@@ -90,7 +90,7 @@
 
                                     </h4>
                                     <p class="card-text text-center"> {% for tag in projet.projet.tags %}
-                                            <a href="{{ path('projet.index', {'tags[]' : tag.id}) }}">
+                                            <a href="{{ path('projet.index') }}?tags[]={{ tag.id }}">
                                                 #{{ tag.name }}  </a>
                                         {% endfor %}</p>
                                 </div>

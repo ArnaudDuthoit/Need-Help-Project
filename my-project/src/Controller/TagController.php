@@ -62,8 +62,7 @@ class TagController extends AbstractController
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            #Persist and flush the new tag in the database
+        if ($form->isSubmitted() && $form->isValid()) { #Persist and flush the new tag in the database
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tag);
             $entityManager->flush();

@@ -16,7 +16,7 @@ use App\Entity\User;
 use App\Entity\Projet;
 use App\Form\ProjetType;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -88,10 +88,10 @@ class UserController extends AbstractController
      * Creating and publishing a new project
      * @Route("/user/new", name="user.projet.create")
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function new(Request $request, ObjectManager $manager)
+    public function new(Request $request, EntityManagerInterface $manager)
     {
 
         $projet = new Projet();
@@ -141,10 +141,10 @@ class UserController extends AbstractController
      * @Route("/user/projet/{id}", name="user.projet.edit", methods="GET|POST")
      * @param Projet $projet
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function edit(Projet $projet, Request $request, ObjectManager $manager)
+    public function edit(Projet $projet, Request $request, EntityManagerInterface $manager)
     {
         #We must check if the user CAN editing this project.Can editing ONLY his project
         if (!$this->isGranted('EDIT', $projet)) {
@@ -171,10 +171,10 @@ class UserController extends AbstractController
      * @Route("user/projet/{id}", name="user.projet.delete" , methods="DELETE")
      * @param Projet $projet
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete(Projet $projet, Request $request, ObjectManager $manager)
+    public function delete(Projet $projet, Request $request, EntityManagerInterface $manager)
     {
 
         #We must check if the user CAN deleting this project.Can deleting ONLY his project
@@ -198,11 +198,11 @@ class UserController extends AbstractController
      * User new password page
      * @Route("/user/new_pwd", name="user.new_pwd", methods="GET|POST")
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @param UserPasswordEncoderInterface $encoder
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function resetPassword(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    public function resetPassword(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = $this->getUser();
         $form = $this->createForm(UserResetPasswordType::class, $user);
@@ -238,10 +238,10 @@ class UserController extends AbstractController
      * User editing his informations (username and mail adress)
      * @Route("/user/editprofile", name="user.editprofile", methods="GET|POST")
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editInfo(Request $request, ObjectManager $manager)
+    public function editInfo(Request $request, EntityManagerInterface $manager)
     {
         $user = $this->getUser();
         $form = $this->createForm(UserInfosType::class, $user);
@@ -263,10 +263,10 @@ class UserController extends AbstractController
      * User delete his account page
      * @Route("/user/deleteprofile", name="user.deleteprofile", methods="GET|POST")
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function deleteUser(Request $request, ObjectManager $manager)
+    public function deleteUser(Request $request, EntityManagerInterface $manager)
     {
         $user = $this->getUser();
         $form = $this->createForm(UserInfosType::class, $user);
@@ -291,7 +291,6 @@ class UserController extends AbstractController
     }
 
 
-
     /**
      * Display all the informations of the user selected + form private messages
      * @Route("/user/{slug}-{id}", name="user.show", requirements={"slug": "[a-z0-9\-]*"})
@@ -299,6 +298,7 @@ class UserController extends AbstractController
      * @param string $slug
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function show(User $user, string $slug, Request $request)
     {

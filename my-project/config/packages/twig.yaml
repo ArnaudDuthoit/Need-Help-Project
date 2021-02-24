@@ -6,3 +6,4 @@ twig:
     globals:
         NewMessages_g: '@App\Services\NewMessages'
         currentUser_g: '@App\Services\currentUser'
+    exception_controller: null

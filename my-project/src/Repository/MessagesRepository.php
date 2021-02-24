@@ -6,7 +6,7 @@ use App\Entity\Messages;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Messages|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,7 +16,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class MessagesRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Messages::class);
     }
@@ -52,10 +52,7 @@ class MessagesRepository extends ServiceEntityRepository
     {
 
         $dql = $this->getEntityManager()
-            ->createQuery('SELECT (a.fromId) as fromUser,
-            count(a.id) as count from App:Messages a 
-            where a.ReadAt is null and a.toId=:toUser 
-            group by a.fromId')
+            ->createQuery('SELECT (a.fromId) as fromUser,count(a.id) as count from App:Messages a where a.ReadAt is null and a.toId=:toUser group by a.fromId')
             ->setParameter('toUser', $to)
             ->getResult(Query::HYDRATE_ARRAY);
 
@@ -75,12 +72,14 @@ class MessagesRepository extends ServiceEntityRepository
      */
     public function CountUnreadCount($to)
     {
+
         $dql = $this->getEntityManager()
-            ->createQuery('SELECT a.id from App:Messages a 
-                                where a.ReadAt is null and a.toId=:toUser')
+            ->createQuery('SELECT a.id from App:Messages a where a.ReadAt is null and a.toId=:toUser')
             ->setParameter('toUser', $to)
             ->getResult(Query::HYDRATE_ARRAY);
+
         return $dql;
+
     }
 
 
@@ -103,8 +102,11 @@ class MessagesRepository extends ServiceEntityRepository
             ->setParameter('toUser', $from);
 
         $query = $queryBuilder->getQuery();
+
         // echo $query->getDQL(), "\n";
+
         $query->execute();
+
         return $queryBuilder;
     }
 

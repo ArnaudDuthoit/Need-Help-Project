@@ -9,7 +9,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Utils\Token;
 use Swift_SmtpTransport;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -23,11 +23,11 @@ class SecurityController extends AbstractController
      * Registration page
      * @Route("/inscription",name="security_registration")
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @param UserPasswordEncoderInterface $encoder
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function registration(Request $request,ObjectManager $manager, UserPasswordEncoderInterface $encoder){
+    public function registration(Request $request,EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder){
         $user = new User();
         $form= $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
@@ -83,14 +83,15 @@ class SecurityController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
     /**
      * Get the Registration Token for account activation
      * @Route("/register", name="register", methods = {"GET"})
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function register(Request $request, ObjectManager $manager)
+    public function register(Request $request, EntityManagerInterface $manager)
     {
         // $_GET parameters
         $token = $request->get('RegisterToken'); #Get the token in the url

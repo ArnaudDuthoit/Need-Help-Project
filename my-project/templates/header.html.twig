@@ -53,7 +53,8 @@
                     <li class="nav-item">
                         <a class="nav-link"
                            href="{{ path('conversations') }}"
-                           style="color:white;{% if current_menu is defined and current_menu == 'conversations' %}border-bottom-style: solid;border-bottom-color:white{% endif %}"> {{ NewMessages_g.CountMessages() | length }} <i class="far fa-envelope"></i> </a>
+                           style="color:white;{% if current_menu is defined and current_menu == 'conversations' %}border-bottom-style: solid;border-bottom-color:white{% endif %}"> {{ NewMessages_g.CountMessages() | length }} <i
+                                    class="far fa-envelope"></i> </a>
                     </li>
 
                     <li class="nav-item dropdown">

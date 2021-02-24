@@ -2,13 +2,13 @@
 liip_imagine:
     filter_sets:
         thumb:
-            quality: 75
+            quality: 50
             filters:
                 thumbnail:
                     size: [360,230]
                     node: outbound
         medium:
-            quality: 75
+            quality: 50
             filters:
                 thumbnail:
                     size: [800,530]

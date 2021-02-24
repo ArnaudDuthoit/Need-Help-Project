@@ -10,7 +10,7 @@ namespace App\Services;
 
 use App\Entity\Messages;
 use App\Repository\MessagesRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 
 class NewMessages extends MessagesRepository
@@ -23,12 +23,11 @@ class NewMessages extends MessagesRepository
      * @param RegistryInterface $registry
      * @param \Symfony\Component\Security\Core\Security $security
      */
-    public function __construct(RegistryInterface $registry,\Symfony\Component\Security\Core\Security $security)
+    public function __construct(ManagerRegistry $registry,\Symfony\Component\Security\Core\Security $security) // Definit ici la valeur de la globale
     {
         parent::__construct($registry, Messages::class);
         $this->securityObj = $security;
     }
-
 
     public function getCountMessages()
     {
